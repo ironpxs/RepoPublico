@@ -1,0 +1,11 @@
+<rss version="2.0">
+  <channel>
+    <title>Example RSS Feed</title>
+    <item>
+      <title>Legitimate Title</title>
+      <description><![CDATA[<script>alert('XSS Attack!');</script>]]></description>
+      <link>http://example.com/item</link>
+      <pubDate>Wed, 28 May 2024 00:00:00 +0000</pubDate>
+    </item>
+  </channel>
+</rss>
