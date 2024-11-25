@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rocked</title>
+  <title>Santa Claus llegó</title>
   <style>
     /* Reset y estructura general */
     * {
@@ -19,9 +19,11 @@
       height: 100vh;
       font-family: 'Courier New', Courier, monospace;
       background: black;
-      color: #00ff00; /* Estilo "hacker" verde */
+      color: #00ff00;
       text-align: center;
+      position: relative;
       animation: flicker 3s infinite;
+      overflow: hidden; /* Oculta cualquier elemento que se desborde fuera del viewport */
     }
     @keyframes flicker {
       0%, 18%, 22%, 25%, 53%, 57%, 100% {
@@ -32,58 +34,148 @@
       }
     }
     h1 {
-      font-size: 3rem;
+      font-size: 3.5rem;
       font-weight: bold;
-      text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00;
+      text-shadow: 0 0 5px red, 0 0 10px green, 0 0 15px red, 0 0 20px green;
       margin-bottom: 1rem;
+      z-index: 2;
     }
+    /* Estilo de la imagen */
     img {
-      max-width: 80%;
-      max-height: 300px;
+      width: 100%;
+      max-width: 500px;
+      height: auto;
       margin-top: 2rem;
-      border: 3px solid #00ff00;
-      border-radius: 10px;
-      box-shadow: 0 0 15px #00ff00;
-      animation: glitch 1.5s infinite;
-    }
-    @keyframes glitch {
-      0% {
-        transform: translate(0);
-      }
-      20% {
-        transform: translate(-5px, 5px);
-      }
-      40% {
-        transform: translate(5px, -5px);
-      }
-      60% {
-        transform: translate(-5px, -5px);
-      }
-      80% {
-        transform: translate(5px, 5px);
-      }
-      100% {
-        transform: translate(0);
-      }
+      display: block;
+      border: none;
+      z-index: 2;
     }
     .warning {
       font-size: 1.2rem;
       margin-top: 1rem;
-      text-shadow: 0 0 5px red, 0 0 10px red, 0 0 20px red;
-      color: red;
+      text-shadow: 0 0 5px red, 0 0 10px green, 0 0 15px red;
+      color: white;
+      z-index: 2;
     }
     footer {
       position: absolute;
       bottom: 10px;
       font-size: 0.8rem;
       color: rgba(255, 0, 0, 0.7);
+      z-index: 2;
+    }
+
+    /* Estilo del botón */
+    .button {
+      background-color: #ff0000;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin-top: 1.5rem;
+      border-radius: 5px;
+      text-transform: uppercase;
+      box-shadow: 0 0 5px red, 0 0 10px green;
+      transition: all 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #ff6666;
+      transform: scale(1.1);
+    }
+
+    /* Estilo de la nieve */
+    .snowflake {
+      position: absolute;
+      top: -10px;
+      width: 8px;
+      height: 8px;
+      background-color: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: fall 10s linear infinite;
+      z-index: 1; /* Asegura que la nieve esté detrás de los otros elementos */
+    }
+
+    /* Animación de caída de nieve */
+    @keyframes fall {
+      0% {
+        top: -10px;
+        left: calc(100% * random());
+        opacity: 1;
+      }
+      100% {
+        top: 100%;
+        opacity: 0;
+      }
+    }
+
+    /* Generación de nieve aleatoria */
+    .snowflake:nth-child(odd) {
+      animation-duration: 12s;
+      animation-delay: -2s;
+    }
+    .snowflake:nth-child(even) {
+      animation-duration: 15s;
+      animation-delay: -5s;
     }
   </style>
 </head>
 <body>
-  <h1>Dulce o datos bancarios</h1>
-  <div class="warning">ACCESO RESTRINGIDO: Esta página ha sido intervenida por las autoridades federales.</div>
+  <h1>🎅 ¡Santa Claus llegó! 🎄</h1>
+  <div class="warning">¡Te hemos visto en la lista de regalos! 🎁</div>
   <img src="https://raw.githubusercontent.com/ironpxs/RepoPublico/refs/heads/main/mapache_navideno.png" alt="mapachito">
-  <footer>Advertencia: La información está siendo monitoreada</footer>
+  <div class="warning">
+    ¡Haz clic en el botón y recibe tu regalo! 🎁🎅
+  </div>
+
+  <!-- Botón para recibir el regalo -->
+  <button class="button" onclick="playAudio()">¡Recibe tu regalo! </button>
+
+  <!-- Elementos de nieve generados por JavaScript -->
+  <div id="snowflakes"></div>
+
+  <!-- Audio de Santa Claus is Coming to Town -->
+  <audio id="audio" autoplay loop>
+    <source src="https://media.singing-bell.com/wp-content/uploads/2013/11/Santa-Claus-is-coming-to-town-Singing-Bell.mp3" type="audio/mpeg">
+    Tu navegador no soporta el formato de audio.
+  </audio>
+
+  <script>
+    // Crear copos de nieve dinámicamente
+    const snowflakesContainer = document.getElementById('snowflakes');
+    const audioElement = document.getElementById('audio');
+
+    // Número de copos de nieve a generar
+    const numSnowflakes = 100;
+
+    // Generar copos de nieve
+    for (let i = 0; i < numSnowflakes; i++) {
+      const snowflake = document.createElement('div');
+      snowflake.classList.add('snowflake');
+
+      // Añadir la animación a cada copo de nieve con variabilidad en el tamaño y la velocidad
+      snowflake.style.animationDuration = `${Math.random() * 5 + 10}s`;  // Duración entre 10s y 15s
+      snowflake.style.animationDelay = `${Math.random() * 10}s`;  // Retraso aleatorio
+
+      // Posición aleatoria en el eje horizontal
+      snowflake.style.left = `${Math.random() * 100}%`;
+
+      // Tamaño aleatorio
+      snowflake.style.width = `${Math.random() * 10 + 5}px`;
+      snowflake.style.height = snowflake.style.width;
+
+      // Añadir el copo al contenedor
+      snowflakesContainer.appendChild(snowflake);
+    }
+
+    // Función para activar la reproducción del audio en caso de que no se haya reproducido automáticamente
+    function playAudio() {
+      if (audioElement.paused) {
+        audioElement.play();
+      }
+    }
+  </script>
 </body>
 </html>
