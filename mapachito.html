@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
       display: flex;
       flex-direction: column;
@@ -23,16 +25,29 @@
       text-align: center;
       position: relative;
       animation: flicker 3s infinite;
-      overflow: hidden; /* Oculta cualquier elemento que se desborde fuera del viewport */
+      overflow: hidden;
+      /* Oculta cualquier elemento que se desborde fuera del viewport */
     }
+
     @keyframes flicker {
-      0%, 18%, 22%, 25%, 53%, 57%, 100% {
+
+      0%,
+      18%,
+      22%,
+      25%,
+      53%,
+      57%,
+      100% {
         opacity: 1;
       }
-      20%, 24%, 55% {
+
+      20%,
+      24%,
+      55% {
         opacity: 0.9;
       }
     }
+
     h1 {
       font-size: 3.5rem;
       font-weight: bold;
@@ -40,6 +55,7 @@
       margin-bottom: 1rem;
       z-index: 2;
     }
+
     /* Estilo de la imagen */
     img {
       width: 100%;
@@ -50,6 +66,7 @@
       border: none;
       z-index: 2;
     }
+
     .warning {
       font-size: 1.2rem;
       margin-top: 1rem;
@@ -57,6 +74,7 @@
       color: white;
       z-index: 2;
     }
+
     footer {
       position: absolute;
       bottom: 10px;
@@ -95,7 +113,8 @@
       border-radius: 50%;
       opacity: 0.8;
       animation: fall 10s linear infinite;
-      z-index: 1; /* Asegura que la nieve esté detrás de los otros elementos */
+      z-index: 1;
+      /* Asegura que la nieve esté detrás de los otros elementos */
     }
 
     /* Animación de caída de nieve */
@@ -105,6 +124,7 @@
         left: calc(100% * random());
         opacity: 1;
       }
+
       100% {
         top: 100%;
         opacity: 0;
@@ -116,12 +136,29 @@
       animation-duration: 12s;
       animation-delay: -2s;
     }
+
     .snowflake:nth-child(even) {
       animation-duration: 15s;
       animation-delay: -5s;
     }
+
+    footer {
+      position: fixed;
+      /* Fijo en la parte inferior */
+      bottom: 0;
+      width: 100%;
+      font-size: 1rem;
+      color: rgba(255, 0, 0, 0.7);
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.7);
+      /* Fondo oscuro para legibilidad */
+      padding: 0.5rem 0;
+      z-index: 9999;
+      /* Asegura que esté sobre todos los elementos */
+    }
   </style>
 </head>
+
 <body>
   <h1>🎅 ¡Santa Claus llegó! 🎄</h1>
   <div class="warning">¡Te hemos visto en la lista de regalos! 🎁</div>
@@ -138,7 +175,9 @@
 
   <!-- Audio de Santa Claus is Coming to Town -->
   <audio id="audio" autoplay loop>
-    <source src="https://media.singing-bell.com/wp-content/uploads/2013/11/Santa-Claus-is-coming-to-town-Singing-Bell.mp3" type="audio/mpeg">
+    <source
+      src="https://media.singing-bell.com/wp-content/uploads/2013/11/Santa-Claus-is-coming-to-town-Singing-Bell.mp3"
+      type="audio/mpeg">
     Tu navegador no soporta el formato de audio.
   </audio>
 
@@ -178,4 +217,5 @@
     }
   </script>
 </body>
+
 </html>
